@@ -20,11 +20,28 @@
 
 <body>
     <section class="wrapper">
-        <div class="form signup">
+    <div class="form signup">
+            <header>Signup</header>
+            <form action="user/register" method="post">
+                <input type="text" placeholder="Họ và tên" required name="username" />
+                <input type="text" placeholder="Email" name="email" required />
+                <input type="password" placeholder="Mật khẩu" name="password" id="password"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ hoa, một chữ thường và một số"
+                    required />
+                <input type="password" id="comfirm_password" placeholder="Xác nhận mật khẩu" required />
+                <div class="row me-2">
+                    <span id="message" class="text-warning"></span><br>
+                </div>
+                <input type="submit" name="submit" value="Signup" />
+            </form>
+        </div>
+
+        <div class="form login">
             <header>Login</header>
             <form action="user/login" method="post">
-                <input type="text" placeholder="Username" required name="username" />
-                <input type="password" placeholder="Password" required name="password" />
+                <input type="text" placeholder="Email" required name="email" />
+                <input type="password" placeholder="Mật khẩu" required name="password" />
                 <a href="#">Forgot password?</a>
                 <input type="submit" name="submit" value="Login" />
             </form>

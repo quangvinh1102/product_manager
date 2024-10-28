@@ -83,12 +83,56 @@
             <div class="product-item bg-light mb-4">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="<?= $this->base_url($row["img"]); ?>" alt="<?= $row["name"]; ?>">
-                    <div class="product-action">
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                        <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                    <div class="product-action flex-column">
+                        <a class="btn btn-outline-dark btn-square w-100" href="<?= _WEB_ROOT; ?>/dashboard/buy/<?= $row["id"]; ?>">Mua ngay</a>
+                        <a class="btn btn-outline-dark btn-square w-100" data-mdb-ripple-init data-mdb-modal-init
+                                data-mdb-target="#exampleModal<?= $row["id"]; ?>" data-id="<?= $row["id"];?>">Thêm vào giỏ hàng</a>
                     </div>
+                    <div class="modal fade" id="exampleModal<?= $row["id"]; ?>" tabindex="-1"
+                            aria-labelledby="exampleModalLabel<?= $row["id"]; ?>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel<?= $row["id"]; ?>">Thêm
+                                            sản phẩm vào giỏ hàng</h5>
+                                        <button type="button" class="btn-close" data-mdb-ripple-init
+                                            data-mdb-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <div class="image_4">
+                                            <img src="<?= $this->base_url($row["img"]); ?>" class="card-img-top"
+                                                alt="<?= $row["name"]; ?>"
+                                                style="max-height: 200px; object-fit: cover;">
+                                        </div>
+                                        <h2 class="dolor_text"><span
+                                                style="color: #ebc30a;"><?= number_format($row["price"], 0); ?></span>
+                                            VND</h2>
+                                        <h2 class="dolor_text"><?= $row["name"]; ?></h2>
+                                        <h2 class="dolor_text_1">Còn <?= $row["quanlity"]; ?> cái</h2>
+                                        <p class="tempor_text"><?= $row["description"]; ?></p>
+                                        <div class="d-flex w-100 justify-content-center">
+                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+
+                                            <input id="form1" min="0" name="quantity" value="1" type="number"
+                                                class="form-control form-control-sm quantity_product"
+                                                style="width: 25%" />
+
+                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary add-to-cart" data-mdb-ripple-init
+                                            data-mdb-dismiss="modal" data-id="<?= $row["id"];?>">Mua</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href=""><?= $row["name"]; ?></a>
@@ -243,3 +287,29 @@
     </div>
 </div>
 <!-- Footer End -->
+
+<script>
+$(document).ready(function() {
+    $('.add-to-cart').off('click').on('click', function() {
+        var productId = $(this).data('id');
+        var quantityProduct = $(this).closest('.modal-content').find(".quantity_product").val();
+        $.ajax({
+            url: 'dashboard/addcart',
+            type: 'POST',
+            data: {
+                add_to_cart: true,
+                product_id: productId,
+                quantity: quantityProduct
+            },
+            success: function(response) {
+                var result = JSON.parse(response);
+                if (result.success) {
+                    alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                } else {
+                    alert('Có lỗi xảy ra, vui lòng thử lại!');
+                }
+            }
+        });
+    });
+});
+</script>

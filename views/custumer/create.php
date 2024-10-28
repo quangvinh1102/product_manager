@@ -3,14 +3,16 @@
         <form action="" method="POST">
             <h1>Thêm khách hàng</h1>
             <div class="mb-3">
-                <label for="product" class="form-label">Tên khách hàng</label>
-                <input type="text" class="form-control" id="product" placeholder="Tên khách hàng" name="name"
-                    required>
+                <label for="product" class="form-label">Chọn tài khoản người dùng</label>
+                <select class="form-select" id="user1" name="user_id">
+                    <?php  foreach($data["users"] as $value){?>
+                    <option value="<?php echo $value["id"]; ?>"><?php echo $value["username"]; ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="product" class="form-label">Địa chỉ</label>
-                <input type="text" class="form-control" id="product" placeholder="Địa chỉ" name="address"
-                    required>
+                <input type="text" class="form-control" id="product" placeholder="Địa chỉ" name="address" required>
             </div>
             <div class="mb-3">
                 <label for="product" class="form-label">Số điện thoại</label>
@@ -19,10 +21,9 @@
             </div>
             <div class="mb-3">
                 <label for="product" class="form-label">Ghi chú</label>
-                <input type="text" class="form-control" id="product" placeholder="Ghi chú" name="description"
-                    required>
+                <input type="text" class="form-control" id="product" placeholder="Ghi chú" name="description" required>
             </div>
-            
+
             <div class="mb-3">
                 <span id="message" class="text-danger"></span>
             </div>

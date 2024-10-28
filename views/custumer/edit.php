@@ -4,8 +4,8 @@
             <h1>Sửa thông tin khách hàng</h1>
             <div class="mb-3">
                 <label for="product" class="form-label">Tên khách hàng</label>
-                <input type="text" class="form-control" id="name" placeholder="Tên khách hàng" name="name"
-                    required value="<?= $data["user"]["name"]; ?>">
+                <input type="text" class="form-control" id="name" placeholder="Tên khách hàng" name="user_id"
+                    required value="<?= $data["user"]["user_id"]; ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="product" class="form-label">Địa chỉ</label>

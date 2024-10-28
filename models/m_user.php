@@ -7,7 +7,7 @@ class m_user extends DB{
     }
 
     public function addUser($username, $email, $password) {
-        $sql = "INSERT INTO `user` VALUES (null,'$username', '$email', '$password')";
+        $sql = "INSERT INTO `user` VALUES (null,'$username', '$email', '$password', 1)";
         return $this->query($sql);
     }
 
@@ -29,7 +29,7 @@ class m_user extends DB{
     }
 
     function login_account($a,$b){
-        $sql = "SELECT *  FROM user WHERE username = '$a' AND password = '$b'";
+        $sql = "SELECT *  FROM user WHERE email = '$a' AND password = '$b'";
         $b = $this->get_row($sql);
         return $b;
     }

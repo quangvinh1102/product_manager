@@ -21,7 +21,7 @@
                     foreach ($data['custumers'] as $key => $row) { ?>
                     <tr>
                         <td><?= $key + 1; ?></td>
-                        <td><?= $row["name"]; ?></td>
+                        <td><?= $row["username"]; ?></td>
                         <td><?= $row["address"]; ?></td>
                         <td><?= $row["phone"]; ?></td>
                         <td>

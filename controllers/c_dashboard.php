@@ -1,5 +1,6 @@
 <?php 
 include_once "models/m_product.php";
+include_once "models/m_cart.php";
 class c_dashboard extends Controller{
 
 
@@ -103,6 +104,53 @@ class c_dashboard extends Controller{
                 setcookie("suc", "Xóa hóa đơn thành công!", time() + 1, "/", "", 0);
             }
             $this->redirect($this->base_url("dashboard/index"));
+        }
+    }
+
+    public function addcart() {
+
+        if (isset($_POST['add_to_cart'])) {
+            $user_id = $_SESSION['login']["id"];
+            $productId = $_POST['product_id'];
+            $quantity = $_POST['quantity'];
+            $result = new m_cart();
+            $product = $result->addCart($user_id, $productId, $quantity);
+            // $result = new m_product();
+            // $products = $result->getProductBy($productId);
+            // // Lấy giỏ hàng từ cookie nếu có
+            // $cart = isset($_COOKIE['cart']) ? json_decode($_COOKIE['cart'], true) : [];
+        
+            // // Thêm sản phẩm vào giỏ hàng
+            // if (isset($cart[$productId])) {
+            //     $cart[$productId]['quantity'] += 1;
+            // } else {
+            //     $cart[$productId] = [
+            //         'name' => $products['name'],
+            //         'price' => $products['price'],
+            //         'img' => $products['img'],
+            //         'quantity' => $products['quanlity'],
+            //         'desc' => $products['description'],
+            //     ];
+            // }
+        
+            // // Lưu giỏ hàng vào cookie (thời gian tồn tại 7 ngày)
+            // setcookie('cart', json_encode($cart), time() + (86400 * 7), "/");
+            if($product) {
+                echo json_encode(['success' => true]);
+            }else {
+                echo json_encode(['error' => true]);
+            }
+            exit;
+        }
+    }
+
+    public function buy() {
+        if (isset($_GET["id"])) {
+            $result = new m_product();
+            $product = $result->getProductBy($_GET["id"]);
+    
+            
+            $this->view('cart/buy', compact('product'));
         }
     }
 

@@ -14,20 +14,21 @@ class c_custumer extends Controller{
     }
 
     public function create(){
+        $result = new m_custumer();
+        $users = $result->getAllUser();
         if (isset($_POST["submit"])) {
-            $result = new m_custumer();
-            $name = $_POST["name"];
+            $user_id = $_POST["user_id"];
             $address = $_POST["address"];
             $phone = $_POST["phone"];
             $des = $_POST["description"];
 
-            $insert = $result->addCustumer($name, $address, $phone, $des);
+            $insert = $result->addCustumer($user_id, 1, $address, $phone, $des);
             if ($insert) {
                 setcookie("suc", "Tạo đơn hàng thành công!!", time() + 1);
                 $this->redirect($this->base_url("custumer/index"));
             }
         }
-        $this->view('custumer/create');
+        $this->view('custumer/create', compact('users'));
     }
 
     public function update() {
@@ -36,11 +37,11 @@ class c_custumer extends Controller{
         if (isset($_GET["id"])) {
             if (isset($_POST["submit"])) {
                 $result = new m_custumer();
-                $name = $_POST["name"];
+                $user_id = $_POST["user_id"];
                 $address = $_POST["address"];
                 $phone = $_POST["phone"];
-                $des = $_POST["description"];
-                $insert = $result->updateCustumer($_GET["id"], $name, $address, $phone, $des);
+                $des = $_POST["desciption"];
+                $insert = $result->updateCustumer($_GET["id"], $user_id, 7, $address, $phone, $des);
                 if ($insert) {
                     setcookie("suc", "Tạo đơn hàng thành công!!", time() + 1);
                     $this->redirect($this->base_url("custumer/index"));

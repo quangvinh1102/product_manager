@@ -60,11 +60,11 @@ class c_user extends Controller{
         {
     
             if (isset($_POST["submit"])) {
-                $username = $_POST["username"];
+                $email = $_POST["email"];
                 $password = $_POST["password"];
 
                 $insert = new m_user();
-                $result = $insert->login_account($username, $password);
+                $result = $insert->login_account($email, $password);
     
                 if (!$result) {
                     setcookie("err", "Sai tài khoản hoặc mật khẩu!", time() + 1, "/", "", 0);
