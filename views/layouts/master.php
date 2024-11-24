@@ -36,7 +36,7 @@
                 <!-- end Topbar -->
 
                 <!-- Start Content-->
-                <div class="container-fluid mt-5">
+                <div class="container-fluid">
                     <?php
                         if (isset($view)) {
                             include $view;

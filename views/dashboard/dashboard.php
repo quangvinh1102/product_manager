@@ -1,6 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <?php foreach ($data['navs'] as $key => $row) { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><?= $row["name"]; ?></a>
+                </li>
+                <?php }; ?>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid mb-3">
     <div class="row px-xl-5">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item position-relative active" style="height: 430px;">
@@ -17,24 +30,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="product-offer mb-30" style="height: 200px;">
-                <img class="img-fluid" src="<?= _WEB_ROOT ?>/public/img/offer-1.jpg" alt="">
-                <div class="offer-text">
-                    <h6 class="text-white text-uppercase">Save 20%</h6>
-                    <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
-                </div>
-            </div>
-            <div class="product-offer mb-30" style="height: 200px;">
-                <img class="img-fluid" src="<?= _WEB_ROOT ?>/public/img/offer-2.jpg" alt="">
-                <div class="offer-text">
-                    <h6 class="text-white text-uppercase">Save 20%</h6>
-                    <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -78,61 +73,61 @@
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured
             Products</span></h2>
     <div class="row px-xl-5">
-    <?php foreach ($data['products'] as $key => $row) { ?>
+        <?php foreach ($data['products'] as $key => $row) { ?>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
             <div class="product-item bg-light mb-4">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="<?= $this->base_url($row["img"]); ?>" alt="<?= $row["name"]; ?>">
                     <div class="product-action flex-column">
-                        <a class="btn btn-outline-dark btn-square w-100" href="<?= _WEB_ROOT; ?>/dashboard/buy/<?= $row["id"]; ?>">Mua ngay</a>
+                        <a class="btn btn-outline-dark btn-square w-100"
+                            href="<?= _WEB_ROOT; ?>/dashboard/buy/<?= $row["id"]; ?>">Mua ngay</a>
                         <a class="btn btn-outline-dark btn-square w-100" data-mdb-ripple-init data-mdb-modal-init
-                                data-mdb-target="#exampleModal<?= $row["id"]; ?>" data-id="<?= $row["id"];?>">Thêm vào giỏ hàng</a>
+                            data-mdb-target="#exampleModal<?= $row["id"]; ?>" data-id="<?= $row["id"];?>">Thêm vào giỏ
+                            hàng</a>
                     </div>
                     <div class="modal fade" id="exampleModal<?= $row["id"]; ?>" tabindex="-1"
-                            aria-labelledby="exampleModalLabel<?= $row["id"]; ?>" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel<?= $row["id"]; ?>">Thêm
-                                            sản phẩm vào giỏ hàng</h5>
-                                        <button type="button" class="btn-close" data-mdb-ripple-init
-                                            data-mdb-dismiss="modal" aria-label="Close"></button>
+                        aria-labelledby="exampleModalLabel<?= $row["id"]; ?>" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel<?= $row["id"]; ?>">Thêm
+                                        sản phẩm vào giỏ hàng</h5>
+                                    <button type="button" class="btn-close" data-mdb-ripple-init
+                                        data-mdb-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div class="image_4">
+                                        <img src="<?= $this->base_url($row["img"]); ?>" class="card-img-top"
+                                            alt="<?= $row["name"]; ?>" style="max-height: 200px; object-fit: cover;">
                                     </div>
-                                    <div class="modal-body text-center">
-                                        <div class="image_4">
-                                            <img src="<?= $this->base_url($row["img"]); ?>" class="card-img-top"
-                                                alt="<?= $row["name"]; ?>"
-                                                style="max-height: 200px; object-fit: cover;">
-                                        </div>
-                                        <h2 class="dolor_text"><span
-                                                style="color: #ebc30a;"><?= number_format($row["price"], 0); ?></span>
-                                            VND</h2>
-                                        <h2 class="dolor_text"><?= $row["name"]; ?></h2>
-                                        <h2 class="dolor_text_1">Còn <?= $row["quanlity"]; ?> cái</h2>
-                                        <p class="tempor_text"><?= $row["description"]; ?></p>
-                                        <div class="d-flex w-100 justify-content-center">
-                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
+                                    <h2 class="dolor_text"><span
+                                            style="color: #ebc30a;"><?= number_format($row["price"], 0); ?></span>
+                                        VND</h2>
+                                    <h2 class="dolor_text"><?= $row["name"]; ?></h2>
+                                    <h2 class="dolor_text_1">Còn <?= $row["quanlity"]; ?> cái</h2>
+                                    <p class="tempor_text"><?= $row["description"]; ?></p>
+                                    <div class="d-flex w-100 justify-content-center">
+                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
 
-                                            <input id="form1" min="0" name="quantity" value="1" type="number"
-                                                class="form-control form-control-sm quantity_product"
-                                                style="width: 25%" />
+                                        <input id="form1" min="0" name="quantity" value="1" type="number"
+                                            class="form-control form-control-sm quantity_product" style="width: 25%" />
 
-                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
+                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary add-to-cart" data-mdb-ripple-init
-                                            data-mdb-dismiss="modal" data-id="<?= $row["id"];?>">Mua</button>
-                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary add-to-cart" data-mdb-ripple-init
+                                        data-mdb-dismiss="modal" data-id="<?= $row["id"];?>">Mua</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
                 <div class="text-center py-4">
                     <a class="h6 text-decoration-none text-truncate" href=""><?= $row["name"]; ?></a>
@@ -151,7 +146,7 @@
                 </div>
             </div>
         </div>
-    <?php }; ?>
+        <?php }; ?>
     </div>
 </div>
 <!-- Products End -->

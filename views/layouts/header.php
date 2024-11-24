@@ -31,6 +31,9 @@
                 <li class="nav-item mx-3">
                     <a class="nav-link text-primary" href="<?= _WEB_ROOT; ?>/product/cart">Giỏ hàng</a>
                 </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link text-primary" href="<?= _WEB_ROOT; ?>/nav/index">Thanh menu</a>
+                </li>
                 <?php } ?>
             </ul>
         </div>
